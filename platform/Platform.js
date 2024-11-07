@@ -68,7 +68,7 @@ class Platform {
   getSignatureMac() {
     if (!this.signatureMac) {
       try {
-        const mac = cp.execSync("cat /sys/class/net/eth0/address", {encoding: 'utf8'});
+        const mac = fs.readFileSync("/sys/class/net/eth0/address", {encoding: 'utf8'});
         this.signatureMac = mac && mac.trim().toUpperCase();
       } catch (err) {}
     }
