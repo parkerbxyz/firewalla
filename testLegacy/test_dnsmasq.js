@@ -4,6 +4,7 @@
 
 'use strict';
 
+let fs = require('fs');
 let chai = require('chai');
 let expect = chai.expect;
 
@@ -21,7 +22,7 @@ dnsmasq.cleanUpPolicyFilter()
 
         dnsmasq.addPolicyFilterEntries(["test2.com", "test3.com"])
           .then(() => {
-            console.log(require("child_process").execSync("cat ~/.firewalla/config/dns/policy_filter.conf").toString("utf8"));
+            console.log(fs.readFileSync("~/.firewalla/config/dns/policy_filter.conf").toString("utf8"));
             
             dnsmasq.start(false, (err) => {
               expect(err).to.equal(undefined);
